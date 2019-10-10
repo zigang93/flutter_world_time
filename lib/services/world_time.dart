@@ -8,8 +8,9 @@ class WorldTime {
   String time; // the time in that location
   String flag; // the country assets icon
   String url; // location url for api endpoint
+  bool isDaytime; // true or false if daytime or not
 
-  WorldTime({ this.location, this.flag, this.url});
+  WorldTime({ this.location, this.flag, this.url });
 
   Future<void> getTime() async {
 
@@ -32,6 +33,7 @@ class WorldTime {
 
       // set time to property, format wth intl
       time = DateFormat.jm().format(now);
+      isDaytime = now.hour > 6 && now.hour < 20 ? true : false;
     } 
     catch (e) {
       print('Caught error: $e');
